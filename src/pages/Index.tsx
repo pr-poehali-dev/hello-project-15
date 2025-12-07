@@ -134,6 +134,16 @@ export default function Index() {
   const [showPaymentDialog, setShowPaymentDialog] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [paymentSuccess, setPaymentSuccess] = useState(false);
+  
+  const [weight, setWeight] = useState('');
+  const [height, setHeight] = useState('');
+  const [age, setAge] = useState('');
+  const [activity, setActivity] = useState('1.2');
+  const [calories, setCalories] = useState<number | null>(null);
+  
+  const [workouts, setWorkouts] = useState<{date: string; type: string; duration: number}[]>([]);
+  const [newWorkoutType, setNewWorkoutType] = useState('');
+  const [newWorkoutDuration, setNewWorkoutDuration] = useState('');
 
   const addToCart = (product: Product) => {
     setCart((prevCart) => {
@@ -182,6 +192,34 @@ export default function Index() {
       }, 2000);
     }, 2000);
   };
+  
+  const calculateCalories = () => {
+    const w = parseFloat(weight);
+    const h = parseFloat(height);
+    const a = parseFloat(age);
+    const act = parseFloat(activity);
+    
+    if (w && h && a) {
+      const bmr = 447.6 + (9.2 * w) + (3.1 * h) - (4.3 * a);
+      const tdee = Math.round(bmr * act);
+      setCalories(tdee);
+    }
+  };
+  
+  const addWorkout = () => {
+    if (newWorkoutType && newWorkoutDuration) {
+      const today = new Date().toLocaleDateString('ru-RU');
+      setWorkouts([...workouts, {
+        date: today,
+        type: newWorkoutType,
+        duration: parseInt(newWorkoutDuration)
+      }]);
+      setNewWorkoutType('');
+      setNewWorkoutDuration('');
+    }
+  };
+  
+  const totalWorkoutTime = workouts.reduce((sum, w) => sum + w.duration, 0);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-rose-50 via-amber-50 to-stone-100">
@@ -400,6 +438,146 @@ export default function Index() {
                 </CardFooter>
               </Card>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 px-4 bg-white/40">
+        <div className="container mx-auto">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">
+            Твои фитнес-инструменты
+          </h2>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+            <Card className="overflow-hidden">
+              <CardHeader className="bg-gradient-to-r from-primary/10 to-secondary/10">
+                <div className="flex items-center gap-3">
+                  <Icon name="Calculator" className="text-primary" size={32} />
+                  <h3 className="text-2xl font-bold">Калькулятор калорий</h3>
+                </div>
+              </CardHeader>
+              <CardContent className="p-6 space-y-4">
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="weight">Вес (кг)</Label>
+                    <Input
+                      id="weight"
+                      type="number"
+                      placeholder="60"
+                      value={weight}
+                      onChange={(e) => setWeight(e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="height">Рост (см)</Label>
+                    <Input
+                      id="height"
+                      type="number"
+                      placeholder="165"
+                      value={height}
+                      onChange={(e) => setHeight(e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="age">Возраст</Label>
+                    <Input
+                      id="age"
+                      type="number"
+                      placeholder="25"
+                      value={age}
+                      onChange={(e) => setAge(e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="activity">Активность</Label>
+                    <select
+                      id="activity"
+                      value={activity}
+                      onChange={(e) => setActivity(e.target.value)}
+                      className="w-full h-10 px-3 rounded-md border border-input bg-background"
+                    >
+                      <option value="1.2">Минимальная</option>
+                      <option value="1.375">Легкая (1-3 раз/нед)</option>
+                      <option value="1.55">Средняя (3-5 раз/нед)</option>
+                      <option value="1.725">Высокая (6-7 раз/нед)</option>
+                      <option value="1.9">Экстремальная</option>
+                    </select>
+                  </div>
+                </div>
+                <Button onClick={calculateCalories} className="w-full">
+                  <Icon name="Zap" size={20} className="mr-2" />
+                  Рассчитать
+                </Button>
+                {calories && (
+                  <div className="bg-primary/10 rounded-lg p-4 text-center animate-scale-in">
+                    <p className="text-sm text-muted-foreground mb-1">Ваша норма:</p>
+                    <p className="text-3xl font-bold text-primary">{calories} ккал/день</p>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+
+            <Card className="overflow-hidden">
+              <CardHeader className="bg-gradient-to-r from-secondary/10 to-accent/10">
+                <div className="flex items-center gap-3">
+                  <Icon name="TrendingUp" className="text-secondary" size={32} />
+                  <h3 className="text-2xl font-bold">Трекер тренировок</h3>
+                </div>
+              </CardHeader>
+              <CardContent className="p-6 space-y-4">
+                <div className="space-y-3">
+                  <div>
+                    <Label htmlFor="workout-type">Тип тренировки</Label>
+                    <Input
+                      id="workout-type"
+                      placeholder="напр.: Йога, Силовая, Кардио"
+                      value={newWorkoutType}
+                      onChange={(e) => setNewWorkoutType(e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="workout-duration">Длительность (мин)</Label>
+                    <Input
+                      id="workout-duration"
+                      type="number"
+                      placeholder="45"
+                      value={newWorkoutDuration}
+                      onChange={(e) => setNewWorkoutDuration(e.target.value)}
+                    />
+                  </div>
+                </div>
+                <Button onClick={addWorkout} className="w-full">
+                  <Icon name="Plus" size={20} className="mr-2" />
+                  Добавить тренировку
+                </Button>
+                
+                <div className="bg-secondary/10 rounded-lg p-4">
+                  <div className="flex items-center justify-between mb-3">
+                    <p className="font-semibold">Всего тренировок:</p>
+                    <Badge className="bg-secondary">{workouts.length}</Badge>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <p className="font-semibold">Общее время:</p>
+                    <p className="text-2xl font-bold text-secondary">{totalWorkoutTime} мин</p>
+                  </div>
+                </div>
+                
+                {workouts.length > 0 && (
+                  <div className="max-h-48 overflow-y-auto space-y-2">
+                    {workouts.slice(-5).reverse().map((workout, index) => (
+                      <div key={index} className="bg-muted/50 rounded-lg p-3 flex items-center justify-between">
+                        <div>
+                          <p className="font-semibold text-sm">{workout.type}</p>
+                          <p className="text-xs text-muted-foreground">{workout.date}</p>
+                        </div>
+                        <Badge variant="outline">{workout.duration} мин</Badge>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
