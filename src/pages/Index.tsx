@@ -153,8 +153,8 @@ export default function Index() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50">
-      <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-purple-100">
+    <div className="min-h-screen bg-gradient-to-br from-rose-50 via-amber-50 to-stone-100">
+      <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-rose-100">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -310,17 +310,17 @@ export default function Index() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-20">
-            <div className="p-6 rounded-2xl bg-white/60 backdrop-blur-sm border border-purple-100 hover:shadow-lg transition-shadow">
+            <div className="p-6 rounded-2xl bg-white/70 backdrop-blur-sm border border-rose-200 hover:shadow-lg transition-shadow">
               <Icon name="Truck" className="mx-auto text-primary mb-4" size={48} />
               <h3 className="text-xl font-bold mb-2">Быстрая доставка</h3>
               <p className="text-gray-600">Доставим за 1-3 дня по всей стране</p>
             </div>
-            <div className="p-6 rounded-2xl bg-white/60 backdrop-blur-sm border border-purple-100 hover:shadow-lg transition-shadow">
+            <div className="p-6 rounded-2xl bg-white/70 backdrop-blur-sm border border-rose-200 hover:shadow-lg transition-shadow">
               <Icon name="Shield" className="mx-auto text-secondary mb-4" size={48} />
               <h3 className="text-xl font-bold mb-2">Безопасная оплата</h3>
               <p className="text-gray-600">SSL-шифрование и проверенные платежные системы</p>
             </div>
-            <div className="p-6 rounded-2xl bg-white/60 backdrop-blur-sm border border-purple-100 hover:shadow-lg transition-shadow">
+            <div className="p-6 rounded-2xl bg-white/70 backdrop-blur-sm border border-rose-200 hover:shadow-lg transition-shadow">
               <Icon name="Award" className="mx-auto text-accent mb-4" size={48} />
               <h3 className="text-xl font-bold mb-2">Гарантия качества</h3>
               <p className="text-gray-600">Только оригинальные товары от производителей</p>
@@ -376,7 +376,7 @@ export default function Index() {
       <section id="about" className="py-20 px-4">
         <div className="container mx-auto max-w-4xl">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">О нас</h2>
-          <div className="bg-white/60 backdrop-blur-sm rounded-3xl p-8 md:p-12 border border-purple-100">
+          <div className="bg-white/70 backdrop-blur-sm rounded-3xl p-8 md:p-12 border border-rose-200">
             <p className="text-lg text-gray-700 mb-6">
               ShopVibe — это современный интернет-магазин, где каждый найдет что-то особенное. Мы тщательно
               отбираем товары, чтобы предложить вам только лучшее.
@@ -442,7 +442,7 @@ export default function Index() {
       <section id="contacts" className="py-20 px-4">
         <div className="container mx-auto max-w-4xl">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">Контакты</h2>
-          <div className="bg-white/60 backdrop-blur-sm rounded-3xl p-8 md:p-12 border border-purple-100">
+          <div className="bg-white/70 backdrop-blur-sm rounded-3xl p-8 md:p-12 border border-rose-200">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div>
                 <div className="flex items-start gap-4 mb-6">
@@ -488,7 +488,7 @@ export default function Index() {
         </div>
       </section>
 
-      <footer className="bg-gradient-to-r from-primary via-secondary to-accent text-white py-8">
+      <footer className="bg-gradient-to-r from-rose-400 via-stone-500 to-amber-300 text-white py-8">
         <div className="container mx-auto px-4 text-center">
           <p className="text-lg font-semibold">© 2024 ShopVibe. Все права защищены.</p>
           <p className="text-sm mt-2 opacity-90">Безопасные покупки с любовью ❤️</p>
