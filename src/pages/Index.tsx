@@ -129,6 +129,13 @@ const reviews = [
   }
 ];
 
+const giftCards = [
+  { id: 1, amount: 1000, discount: 0, popular: false },
+  { id: 2, amount: 3000, discount: 5, popular: true },
+  { id: 3, amount: 5000, discount: 10, popular: false },
+  { id: 4, amount: 10000, discount: 15, popular: false }
+];
+
 export default function Index() {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [activeSection, setActiveSection] = useState('home');
@@ -145,6 +152,11 @@ export default function Index() {
   const [workouts, setWorkouts] = useState<{date: string; type: string; duration: number}[]>([]);
   const [newWorkoutType, setNewWorkoutType] = useState('');
   const [newWorkoutDuration, setNewWorkoutDuration] = useState('');
+  
+  const [selectedGiftCard, setSelectedGiftCard] = useState<number | null>(null);
+  const [giftCardRecipient, setGiftCardRecipient] = useState('');
+  const [giftCardMessage, setGiftCardMessage] = useState('');
+  const [showGiftCardDialog, setShowGiftCardDialog] = useState(false);
 
   const addToCart = (product: Product) => {
     setCart((prevCart) => {
@@ -278,6 +290,14 @@ export default function Index() {
                 }`}
               >
                 О нас
+              </button>
+              <button
+                onClick={() => scrollToSection('giftcards')}
+                className={`transition-colors ${
+                  activeSection === 'giftcards' ? 'text-primary font-semibold' : 'text-gray-600 hover:text-primary'
+                }`}
+              >
+                Подарочные карты
               </button>
               <button
                 onClick={() => scrollToSection('delivery')}
@@ -706,6 +726,149 @@ export default function Index() {
         </div>
       </section>
 
+      <section id="giftcards" className="py-20 px-4">
+        <div className="container mx-auto max-w-6xl">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">Подарочные карты</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Идеальный подарок для тех, кто любит спорт! Дарите заботу о здоровье и красоте
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            {giftCards.map((card) => (
+              <Card 
+                key={card.id}
+                className={`relative border-2 transition-all duration-300 hover:shadow-xl cursor-pointer ${
+                  card.popular ? 'border-primary shadow-lg scale-105' : 'hover:border-primary'
+                } ${selectedGiftCard === card.id ? 'ring-4 ring-primary/50' : ''}`}
+                onClick={() => setSelectedGiftCard(card.id)}
+              >
+                {card.popular && (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                    <Badge className="bg-primary text-white px-4 py-1">Популярная</Badge>
+                  </div>
+                )}
+                {card.discount > 0 && (
+                  <div className="absolute -top-3 -right-3">
+                    <div className="bg-accent text-white rounded-full w-12 h-12 flex items-center justify-center font-bold text-sm">
+                      -{card.discount}%
+                    </div>
+                  </div>
+                )}
+                <CardContent className="p-6 text-center">
+                  <div className="w-20 h-20 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Icon name="Gift" className="text-primary" size={40} />
+                  </div>
+                  <p className="text-4xl font-bold mb-2">{card.amount.toLocaleString()} ₽</p>
+                  {card.discount > 0 && (
+                    <p className="text-sm text-green-600 font-semibold mb-2">
+                      Экономия {(card.amount * card.discount / 100).toLocaleString()} ₽
+                    </p>
+                  )}
+                  <p className="text-gray-600 text-sm">Действует 1 год</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          <div className="bg-white/70 backdrop-blur-sm rounded-3xl p-8 md:p-12 border border-stone-200">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+              <div>
+                <h3 className="text-2xl font-bold mb-4 flex items-center gap-2">
+                  <Icon name="Sparkles" className="text-primary" size={28} />
+                  Преимущества подарочных карт
+                </h3>
+                <ul className="space-y-3">
+                  <li className="flex items-start gap-3">
+                    <Icon name="Check" className="text-green-600 mt-1" size={20} />
+                    <span>Получатель сам выберет что хочет</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Icon name="Check" className="text-green-600 mt-1" size={20} />
+                    <span>Действует на весь ассортимент магазина</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Icon name="Check" className="text-green-600 mt-1" size={20} />
+                    <span>Можно использовать частями</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Icon name="Check" className="text-green-600 mt-1" size={20} />
+                    <span>Срок действия 1 год с момента покупки</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Icon name="Check" className="text-green-600 mt-1" size={20} />
+                    <span>Дополнительные скидки на крупные номиналы</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div>
+                <h3 className="text-2xl font-bold mb-4 flex items-center gap-2">
+                  <Icon name="Send" className="text-secondary" size={28} />
+                  Как это работает?
+                </h3>
+                <div className="space-y-4">
+                  <div className="flex gap-4">
+                    <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white font-bold flex-shrink-0">1</div>
+                    <div>
+                      <p className="font-semibold">Выберите номинал</p>
+                      <p className="text-sm text-gray-600">От 1000 до 10000 рублей</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-4">
+                    <div className="w-8 h-8 bg-secondary rounded-full flex items-center justify-center text-white font-bold flex-shrink-0">2</div>
+                    <div>
+                      <p className="font-semibold">Оформите покупку</p>
+                      <p className="text-sm text-gray-600">Укажите получателя и пожелание</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-4">
+                    <div className="w-8 h-8 bg-accent rounded-full flex items-center justify-center text-white font-bold flex-shrink-0">3</div>
+                    <div>
+                      <p className="font-semibold">Получите карту</p>
+                      <p className="text-sm text-gray-600">На email или в красивой упаковке</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-4">
+                    <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white font-bold flex-shrink-0">4</div>
+                    <div>
+                      <p className="font-semibold">Дарите с радостью!</p>
+                      <p className="text-sm text-gray-600">Получатель активирует код при заказе</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="text-center">
+              <Button 
+                size="lg" 
+                className="bg-primary hover:bg-primary/90 text-white px-8 py-6 text-lg"
+                onClick={() => {
+                  if (!selectedGiftCard) {
+                    toast.error('Выберите подарочную карту', {
+                      description: 'Пожалуйста, выберите номинал карты для покупки'
+                    });
+                    return;
+                  }
+                  setShowGiftCardDialog(true);
+                }}
+                disabled={!selectedGiftCard}
+              >
+                <Icon name="ShoppingCart" size={24} className="mr-2" />
+                Купить подарочную карту
+              </Button>
+              {selectedGiftCard && (
+                <p className="text-sm text-gray-600 mt-3">
+                  Выбран номинал: {giftCards.find(c => c.id === selectedGiftCard)?.amount.toLocaleString()} ₽
+                </p>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="py-20 px-4">
         <div className="container mx-auto max-w-4xl">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">О нас</h2>
@@ -1052,6 +1215,115 @@ export default function Index() {
               </div>
             </div>
           )}
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={showGiftCardDialog} onOpenChange={setShowGiftCardDialog}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-bold text-center flex items-center justify-center gap-2">
+              <Icon name="Gift" className="text-primary" size={28} />
+              Покупка подарочной карты
+            </DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            <div className="bg-gradient-to-r from-primary/10 to-secondary/10 rounded-lg p-4 text-center">
+              <p className="text-sm text-gray-600 mb-1">Номинал карты</p>
+              <p className="text-3xl font-bold text-primary">
+                {selectedGiftCard ? giftCards.find(c => c.id === selectedGiftCard)?.amount.toLocaleString() : 0} ₽
+              </p>
+              {selectedGiftCard && giftCards.find(c => c.id === selectedGiftCard)?.discount ? (
+                <p className="text-sm text-green-600 font-semibold mt-1">
+                  Скидка {giftCards.find(c => c.id === selectedGiftCard)?.discount}% уже применена!
+                </p>
+              ) : null}
+            </div>
+
+            <div className="space-y-3">
+              <div>
+                <Label htmlFor="recipient-name">Имя получателя</Label>
+                <Input 
+                  id="recipient-name" 
+                  placeholder="Анна Иванова" 
+                  value={giftCardRecipient}
+                  onChange={(e) => setGiftCardRecipient(e.target.value)}
+                />
+              </div>
+              <div>
+                <Label htmlFor="gift-message">Поздравление (необязательно)</Label>
+                <Input 
+                  id="gift-message" 
+                  placeholder="С днём рождения! Будь здоровой и красивой!" 
+                  value={giftCardMessage}
+                  onChange={(e) => setGiftCardMessage(e.target.value)}
+                />
+              </div>
+              <div>
+                <Label htmlFor="buyer-email">Ваш Email</Label>
+                <Input id="buyer-email" type="email" placeholder="your@email.ru" />
+              </div>
+              <div>
+                <Label htmlFor="buyer-phone">Ваш телефон</Label>
+                <Input id="buyer-phone" placeholder="+7 (999) 123-45-67" />
+              </div>
+            </div>
+
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+              <div className="flex items-start gap-2">
+                <Icon name="Info" className="text-blue-600 mt-0.5" size={16} />
+                <p className="text-xs text-blue-800">
+                  Карта будет отправлена на указанный email в течение 5 минут после оплаты
+                </p>
+              </div>
+            </div>
+
+            <Button
+              className="w-full"
+              size="lg"
+              onClick={() => {
+                if (!giftCardRecipient) {
+                  toast.error('Укажите получателя', {
+                    description: 'Пожалуйста, введите имя получателя подарочной карты'
+                  });
+                  return;
+                }
+                
+                setIsProcessing(true);
+                setTimeout(() => {
+                  setIsProcessing(false);
+                  setPaymentSuccess(true);
+                  toast.success('Подарочная карта куплена!', {
+                    description: 'Карта отправлена на ваш email'
+                  });
+                  setTimeout(() => {
+                    setPaymentSuccess(false);
+                    setShowGiftCardDialog(false);
+                    setGiftCardRecipient('');
+                    setGiftCardMessage('');
+                    setSelectedGiftCard(null);
+                  }, 2000);
+                }, 2000);
+              }}
+              disabled={isProcessing}
+            >
+              {isProcessing ? (
+                <>
+                  <Icon name="Loader2" size={20} className="mr-2 animate-spin" />
+                  Обработка...
+                </>
+              ) : (
+                <>
+                  <Icon name="CreditCard" size={20} className="mr-2" />
+                  Оплатить {selectedGiftCard ? giftCards.find(c => c.id === selectedGiftCard)?.amount.toLocaleString() : 0} ₽
+                </>
+              )}
+            </Button>
+
+            <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+              <Icon name="ShieldCheck" size={16} />
+              <span>Безопасная оплата • Срок действия 1 год</span>
+            </div>
+          </div>
         </DialogContent>
       </Dialog>
     </div>
