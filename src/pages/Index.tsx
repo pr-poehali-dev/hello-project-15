@@ -157,6 +157,9 @@ export default function Index() {
   const [giftCardRecipient, setGiftCardRecipient] = useState('');
   const [giftCardMessage, setGiftCardMessage] = useState('');
   const [showGiftCardDialog, setShowGiftCardDialog] = useState(false);
+  
+  const [giftCardCode, setGiftCardCode] = useState('');
+  const [appliedGiftCard, setAppliedGiftCard] = useState<{code: string; amount: number} | null>(null);
 
   const addToCart = (product: Product) => {
     setCart((prevCart) => {
@@ -184,8 +187,10 @@ export default function Index() {
     );
   };
 
-  const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const subtotalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+  const giftCardDiscount = appliedGiftCard ? Math.min(appliedGiftCard.amount, subtotalPrice) : 0;
+  const totalPrice = subtotalPrice - giftCardDiscount;
 
   const scrollToSection = (sectionId: string) => {
     setActiveSection(sectionId);
@@ -202,8 +207,45 @@ export default function Index() {
         setPaymentSuccess(false);
         setShowPaymentDialog(false);
         setCart([]);
+        setAppliedGiftCard(null);
+        setGiftCardCode('');
       }, 2000);
     }, 2000);
+  };
+  
+  const applyGiftCard = () => {
+    if (!giftCardCode.trim()) {
+      toast.error('Введите код карты', {
+        description: 'Пожалуйста, укажите код подарочной карты'
+      });
+      return;
+    }
+    
+    const validCodes: {[key: string]: number} = {
+      'GIFT1000': 1000,
+      'GIFT3000': 3000,
+      'GIFT5000': 5000,
+      'GIFT10000': 10000
+    };
+    
+    const upperCode = giftCardCode.toUpperCase().trim();
+    
+    if (validCodes[upperCode]) {
+      setAppliedGiftCard({code: upperCode, amount: validCodes[upperCode]});
+      toast.success('Подарочная карта активирована!', {
+        description: `Скидка ${validCodes[upperCode].toLocaleString()} ₽ применена`
+      });
+    } else {
+      toast.error('Неверный код карты', {
+        description: 'Проверьте правильность введённого кода'
+      });
+    }
+  };
+  
+  const removeGiftCard = () => {
+    setAppliedGiftCard(null);
+    setGiftCardCode('');
+    toast.info('Подарочная карта удалена');
   };
   
   const calculateCalories = () => {
@@ -1160,16 +1202,78 @@ export default function Index() {
             </div>
           ) : (
             <div className="space-y-4 py-4">
-              <div className="bg-muted rounded-lg p-4">
-                <div className="flex justify-between mb-2">
+              <div className="bg-muted rounded-lg p-4 space-y-2">
+                <div className="flex justify-between">
                   <span className="text-muted-foreground">Товаров:</span>
                   <span className="font-semibold">{totalItems} шт.</span>
                 </div>
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Сумма:</span>
+                  <span className="font-semibold">{subtotalPrice.toLocaleString()} ₽</span>
+                </div>
+                {appliedGiftCard && (
+                  <div className="flex justify-between text-green-600">
+                    <span>Подарочная карта:</span>
+                    <span className="font-semibold">-{giftCardDiscount.toLocaleString()} ₽</span>
+                  </div>
+                )}
+                <Separator />
                 <div className="flex justify-between text-lg font-bold">
                   <span>Итого:</span>
                   <span className="text-primary">{totalPrice.toLocaleString()} ₽</span>
                 </div>
               </div>
+
+              {!appliedGiftCard ? (
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                  <Label htmlFor="giftcard-code" className="text-sm font-semibold mb-2 block">
+                    Есть подарочная карта?
+                  </Label>
+                  <div className="flex gap-2">
+                    <Input 
+                      id="giftcard-code" 
+                      placeholder="Введите код (например: GIFT1000)" 
+                      value={giftCardCode}
+                      onChange={(e) => setGiftCardCode(e.target.value)}
+                      onKeyDown={(e) => e.key === 'Enter' && applyGiftCard()}
+                    />
+                    <Button 
+                      variant="outline" 
+                      onClick={applyGiftCard}
+                      className="flex-shrink-0"
+                    >
+                      Применить
+                    </Button>
+                  </div>
+                  <p className="text-xs text-gray-600 mt-2">
+                    Примеры кодов: GIFT1000, GIFT3000, GIFT5000, GIFT10000
+                  </p>
+                </div>
+              ) : (
+                <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <Icon name="Gift" className="text-green-600" size={20} />
+                      <div>
+                        <p className="text-sm font-semibold text-green-800">
+                          Карта {appliedGiftCard.code} активирована
+                        </p>
+                        <p className="text-xs text-green-600">
+                          Скидка: {giftCardDiscount.toLocaleString()} ₽
+                        </p>
+                      </div>
+                    </div>
+                    <Button 
+                      variant="ghost" 
+                      size="sm"
+                      onClick={removeGiftCard}
+                      className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                    >
+                      <Icon name="X" size={16} />
+                    </Button>
+                  </div>
+                </div>
+              )}
 
               <div className="space-y-3">
                 <div>
