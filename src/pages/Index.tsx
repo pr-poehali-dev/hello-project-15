@@ -4,6 +4,9 @@ import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { Separator } from '@/components/ui/separator';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import Icon from '@/components/ui/icon';
 
 interface Product {
@@ -97,6 +100,9 @@ const reviews = [
 export default function Index() {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [activeSection, setActiveSection] = useState('home');
+  const [showPaymentDialog, setShowPaymentDialog] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
 
   const addToCart = (product: Product) => {
     setCart((prevCart) => {
@@ -131,6 +137,19 @@ export default function Index() {
     setActiveSection(sectionId);
     const element = document.getElementById(sectionId);
     element?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handlePayment = () => {
+    setIsProcessing(true);
+    setTimeout(() => {
+      setIsProcessing(false);
+      setPaymentSuccess(true);
+      setTimeout(() => {
+        setPaymentSuccess(false);
+        setShowPaymentDialog(false);
+        setCart([]);
+      }, 2000);
+    }, 2000);
   };
 
   return (
@@ -261,7 +280,7 @@ export default function Index() {
                           <span>Итого:</span>
                           <span>{totalPrice.toLocaleString()} ₽</span>
                         </div>
-                        <Button className="w-full" size="lg">
+                        <Button className="w-full" size="lg" onClick={() => setShowPaymentDialog(true)}>
                           <Icon name="CreditCard" size={20} className="mr-2" />
                           Оплатить
                         </Button>
@@ -475,6 +494,81 @@ export default function Index() {
           <p className="text-sm mt-2 opacity-90">Безопасные покупки с любовью ❤️</p>
         </div>
       </footer>
+
+      <Dialog open={showPaymentDialog} onOpenChange={setShowPaymentDialog}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-bold text-center">
+              {paymentSuccess ? 'Оплата успешна!' : 'Оформление заказа'}
+            </DialogTitle>
+          </DialogHeader>
+          {paymentSuccess ? (
+            <div className="py-8 text-center animate-scale-in">
+              <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Icon name="Check" size={48} className="text-green-600" />
+              </div>
+              <p className="text-lg font-semibold mb-2">Спасибо за покупку!</p>
+              <p className="text-muted-foreground">Ваш заказ принят в обработку</p>
+            </div>
+          ) : (
+            <div className="space-y-4 py-4">
+              <div className="bg-muted rounded-lg p-4">
+                <div className="flex justify-between mb-2">
+                  <span className="text-muted-foreground">Товаров:</span>
+                  <span className="font-semibold">{totalItems} шт.</span>
+                </div>
+                <div className="flex justify-between text-lg font-bold">
+                  <span>Итого:</span>
+                  <span className="text-primary">{totalPrice.toLocaleString()} ₽</span>
+                </div>
+              </div>
+
+              <div className="space-y-3">
+                <div>
+                  <Label htmlFor="name">Имя</Label>
+                  <Input id="name" placeholder="Иван Иванов" />
+                </div>
+                <div>
+                  <Label htmlFor="email">Email</Label>
+                  <Input id="email" type="email" placeholder="example@mail.ru" />
+                </div>
+                <div>
+                  <Label htmlFor="phone">Телефон</Label>
+                  <Input id="phone" placeholder="+7 (999) 123-45-67" />
+                </div>
+                <div>
+                  <Label htmlFor="address">Адрес доставки</Label>
+                  <Input id="address" placeholder="г. Москва, ул. Примерная, д. 1" />
+                </div>
+              </div>
+
+              <Button
+                className="w-full"
+                size="lg"
+                onClick={handlePayment}
+                disabled={isProcessing}
+              >
+                {isProcessing ? (
+                  <>
+                    <Icon name="Loader2" size={20} className="mr-2 animate-spin" />
+                    Обработка...
+                  </>
+                ) : (
+                  <>
+                    <Icon name="CreditCard" size={20} className="mr-2" />
+                    Оплатить {totalPrice.toLocaleString()} ₽
+                  </>
+                )}
+              </Button>
+
+              <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+                <Icon name="Shield" size={16} />
+                <span>Безопасная оплата SSL</span>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
