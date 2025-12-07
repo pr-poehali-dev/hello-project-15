@@ -8,6 +8,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import Icon from '@/components/ui/icon';
+import { toast } from 'sonner';
 
 interface Product {
   id: number;
@@ -194,6 +195,13 @@ export default function Index() {
   };
   
   const calculateCalories = () => {
+    if (!weight || !height || !age) {
+      toast.error('Заполните все поля', {
+        description: 'Пожалуйста, укажите вес, рост и возраст для расчёта калорий'
+      });
+      return;
+    }
+    
     const w = parseFloat(weight);
     const h = parseFloat(height);
     const a = parseFloat(age);
@@ -203,10 +211,20 @@ export default function Index() {
       const bmr = 447.6 + (9.2 * w) + (3.1 * h) - (4.3 * a);
       const tdee = Math.round(bmr * act);
       setCalories(tdee);
+      toast.success('Расчёт выполнен!', {
+        description: `Ваша норма калорий: ${tdee} ккал/день`
+      });
     }
   };
   
   const addWorkout = () => {
+    if (!newWorkoutType || !newWorkoutDuration) {
+      toast.error('Заполните все поля', {
+        description: 'Пожалуйста, укажите тип и длительность тренировки'
+      });
+      return;
+    }
+    
     if (newWorkoutType && newWorkoutDuration) {
       const today = new Date().toLocaleDateString('ru-RU');
       setWorkouts([...workouts, {
@@ -214,6 +232,9 @@ export default function Index() {
         type: newWorkoutType,
         duration: parseInt(newWorkoutDuration)
       }]);
+      toast.success('Тренировка добавлена!', {
+        description: `${newWorkoutType} - ${newWorkoutDuration} мин`
+      });
       setNewWorkoutType('');
       setNewWorkoutDuration('');
     }
