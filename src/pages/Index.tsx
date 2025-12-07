@@ -259,6 +259,14 @@ export default function Index() {
                 О нас
               </button>
               <button
+                onClick={() => scrollToSection('delivery')}
+                className={`transition-colors ${
+                  activeSection === 'delivery' ? 'text-primary font-semibold' : 'text-gray-600 hover:text-primary'
+                }`}
+              >
+                Доставка
+              </button>
+              <button
                 onClick={() => scrollToSection('reviews')}
                 className={`transition-colors ${
                   activeSection === 'reviews' ? 'text-primary font-semibold' : 'text-gray-600 hover:text-primary'
@@ -606,6 +614,158 @@ export default function Index() {
               <div className="text-center">
                 <p className="text-4xl font-bold text-accent mb-2">99%</p>
                 <p className="text-gray-600">Рекомендуют подругам</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="delivery" className="py-20 px-4">
+        <div className="container mx-auto max-w-6xl">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">Доставка и оплата</h2>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+            <Card className="overflow-hidden">
+              <CardHeader className="bg-gradient-to-r from-primary/10 to-secondary/10">
+                <div className="flex items-center gap-3">
+                  <Icon name="Truck" className="text-primary" size={32} />
+                  <h3 className="text-2xl font-bold">Способы доставки</h3>
+                </div>
+              </CardHeader>
+              <CardContent className="p-6 space-y-4">
+                <div className="flex items-start gap-4 p-4 bg-muted/50 rounded-lg">
+                  <Icon name="Home" className="text-primary mt-1" size={24} />
+                  <div className="flex-1">
+                    <h4 className="font-bold mb-1">Курьером по Москве</h4>
+                    <p className="text-sm text-gray-600 mb-2">Доставка в день заказа</p>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-muted-foreground">Стоимость:</span>
+                      <span className="font-bold text-primary">300 ₽</span>
+                    </div>
+                    <div className="mt-2 text-xs text-green-600 font-semibold">
+                      Бесплатно от 3000 ₽
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4 p-4 bg-muted/50 rounded-lg">
+                  <Icon name="Package" className="text-secondary mt-1" size={24} />
+                  <div className="flex-1">
+                    <h4 className="font-bold mb-1">Почта России</h4>
+                    <p className="text-sm text-gray-600 mb-2">Доставка 5-10 дней</p>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-muted-foreground">Стоимость:</span>
+                      <span className="font-bold text-secondary">от 250 ₽</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4 p-4 bg-muted/50 rounded-lg">
+                  <Icon name="MapPin" className="text-accent mt-1" size={24} />
+                  <div className="flex-1">
+                    <h4 className="font-bold mb-1">Пункты выдачи (CDEK, Boxberry)</h4>
+                    <p className="text-sm text-gray-600 mb-2">Доставка 3-7 дней</p>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-muted-foreground">Стоимость:</span>
+                      <span className="font-bold text-accent">от 200 ₽</span>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="overflow-hidden">
+              <CardHeader className="bg-gradient-to-r from-accent/10 to-primary/10">
+                <div className="flex items-center gap-3">
+                  <Icon name="CreditCard" className="text-accent" size={32} />
+                  <h3 className="text-2xl font-bold">Способы оплаты</h3>
+                </div>
+              </CardHeader>
+              <CardContent className="p-6 space-y-4">
+                <div className="flex items-start gap-4 p-4 bg-muted/50 rounded-lg">
+                  <Icon name="Smartphone" className="text-primary mt-1" size={24} />
+                  <div>
+                    <h4 className="font-bold mb-1">Онлайн на сайте</h4>
+                    <p className="text-sm text-gray-600">Банковские карты, ЮКасса, СБП</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4 p-4 bg-muted/50 rounded-lg">
+                  <Icon name="Banknote" className="text-secondary mt-1" size={24} />
+                  <div>
+                    <h4 className="font-bold mb-1">При получении</h4>
+                    <p className="text-sm text-gray-600">Наличными или картой курьеру</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4 p-4 bg-muted/50 rounded-lg">
+                  <Icon name="Wallet" className="text-accent mt-1" size={24} />
+                  <div>
+                    <h4 className="font-bold mb-1">В пункте выдачи</h4>
+                    <p className="text-sm text-gray-600">Наличными или картой при получении</p>
+                  </div>
+                </div>
+
+                <div className="mt-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Icon name="ShieldCheck" className="text-green-600" size={20} />
+                    <h4 className="font-bold text-green-800">Гарантии безопасности</h4>
+                  </div>
+                  <ul className="text-sm text-green-700 space-y-1">
+                    <li>• SSL-шифрование данных</li>
+                    <li>• Возможность примерки</li>
+                    <li>• Возврат в течение 14 дней</li>
+                  </ul>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="bg-white/70 backdrop-blur-sm rounded-3xl p-8 md:p-12 border border-rose-200">
+            <div className="flex items-center gap-3 mb-6">
+              <Icon name="Info" className="text-primary" size={32} />
+              <h3 className="text-2xl font-bold">Важная информация</h3>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <h4 className="font-bold mb-3 flex items-center gap-2">
+                  <Icon name="Clock" size={20} className="text-primary" />
+                  Сроки обработки
+                </h4>
+                <ul className="space-y-2 text-gray-700">
+                  <li className="flex items-start gap-2">
+                    <Icon name="Check" size={16} className="text-green-600 mt-1" />
+                    <span>Заказы до 14:00 отправляются в тот же день</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Icon name="Check" size={16} className="text-green-600 mt-1" />
+                    <span>Заказы после 14:00 — на следующий день</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Icon name="Check" size={16} className="text-green-600 mt-1" />
+                    <span>В выходные отправка в понедельник</span>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="font-bold mb-3 flex items-center gap-2">
+                  <Icon name="Package" size={20} className="text-secondary" />
+                  Упаковка
+                </h4>
+                <ul className="space-y-2 text-gray-700">
+                  <li className="flex items-start gap-2">
+                    <Icon name="Check" size={16} className="text-green-600 mt-1" />
+                    <span>Безопасная упаковка с защитой</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Icon name="Check" size={16} className="text-green-600 mt-1" />
+                    <span>Нейтральный дизайн коробки</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Icon name="Check" size={16} className="text-green-600 mt-1" />
+                    <span>Бесплатная подарочная упаковка</span>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
