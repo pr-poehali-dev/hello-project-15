@@ -25,75 +25,106 @@ interface CartItem extends Product {
 const products: Product[] = [
   {
     id: 1,
-    name: 'Беспроводные наушники',
-    price: 5990,
-    category: 'Аудио',
-    image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=400&fit=crop',
-    description: 'Премиальное качество звука'
+    name: 'Спортивные леггинсы',
+    price: 2490,
+    category: 'Одежда',
+    image: 'https://images.unsplash.com/photo-1506629082955-511b1aa562c8?w=400&h=400&fit=crop',
+    description: 'Высокая посадка, дышащая ткань'
   },
   {
     id: 2,
-    name: 'Смарт-часы',
-    price: 12990,
-    category: 'Гаджеты',
-    image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=400&fit=crop',
-    description: 'Отслеживание активности'
+    name: 'Спортивный топ',
+    price: 1290,
+    category: 'Одежда',
+    image: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&h=400&fit=crop',
+    description: 'Поддержка и комфорт'
   },
   {
     id: 3,
-    name: 'Рюкзак для ноутбука',
-    price: 3490,
-    category: 'Аксессуары',
-    image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=400&fit=crop',
-    description: 'Вместительный и стильный'
+    name: 'Гантели 2 кг (пара)',
+    price: 1490,
+    category: 'Инвентарь',
+    image: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&h=400&fit=crop',
+    description: 'Неопреновое покрытие'
   },
   {
     id: 4,
-    name: 'Портативная колонка',
-    price: 4590,
-    category: 'Аудио',
-    image: 'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=400&h=400&fit=crop',
-    description: 'Мощный звук 360°'
+    name: 'Протеиновый коктейль',
+    price: 1890,
+    category: 'Питание',
+    image: 'https://images.unsplash.com/photo-1579722820308-d74e571900a9?w=400&h=400&fit=crop',
+    description: 'Ванильный вкус, 25г белка'
   },
   {
     id: 5,
-    name: 'Фитнес-браслет',
-    price: 2990,
-    category: 'Гаджеты',
-    image: 'https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?w=400&h=400&fit=crop',
-    description: 'Контроль здоровья 24/7'
+    name: 'Бутылка для воды 750мл',
+    price: 790,
+    category: 'Аксессуары',
+    image: 'https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=400&h=400&fit=crop',
+    description: 'Тритан, без BPA'
   },
   {
     id: 6,
-    name: 'Чехол для телефона',
-    price: 890,
+    name: 'Фитнес-резинки (набор)',
+    price: 990,
+    category: 'Инвентарь',
+    image: 'https://images.unsplash.com/photo-1598289431512-b97b0917affc?w=400&h=400&fit=crop',
+    description: '3 уровня сопротивления'
+  },
+  {
+    id: 7,
+    name: 'Коврик для йоги',
+    price: 1990,
+    category: 'Инвентарь',
+    image: 'https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f?w=400&h=400&fit=crop',
+    description: 'Нескользящий, 6мм'
+  },
+  {
+    id: 8,
+    name: 'Витамины для спортсменов',
+    price: 1590,
+    category: 'Питание',
+    image: 'https://images.unsplash.com/photo-1550572017-4a2c9e1e6e66?w=400&h=400&fit=crop',
+    description: 'Комплекс на 30 дней'
+  },
+  {
+    id: 9,
+    name: 'Спортивная сумка',
+    price: 2290,
     category: 'Аксессуары',
-    image: 'https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?w=400&h=400&fit=crop',
-    description: 'Защита и стиль'
+    image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=400&fit=crop',
+    description: 'Вместительная, водоотталкивающая'
   }
 ];
 
 const reviews = [
   {
     id: 1,
-    name: 'Анна Петрова',
+    name: 'Мария Смирнова',
     rating: 5,
-    text: 'Отличный магазин! Быстрая доставка и качественные товары.',
-    date: '15.11.2024'
+    text: 'Леггинсы просто огонь! Не скатываются, идеально сидят. Беру уже третью пару!',
+    date: '02.12.2024'
   },
   {
     id: 2,
-    name: 'Михаил Иванов',
+    name: 'Анастасия К.',
     rating: 5,
-    text: 'Заказывал наушники - звук просто супер! Рекомендую.',
-    date: '10.11.2024'
+    text: 'Гантели отличного качества, покрытие не скользит. Довольна покупкой!',
+    date: '28.11.2024'
   },
   {
     id: 3,
-    name: 'Елена Сидорова',
+    name: 'Екатерина Волкова',
+    rating: 5,
+    text: 'Протеин вкусный, хорошо размешивается. Результаты после тренировок радуют!',
+    date: '20.11.2024'
+  },
+  {
+    id: 4,
+    name: 'Дарья Новикова',
     rating: 4,
-    text: 'Хороший выбор товаров, удобный интерфейс сайта.',
-    date: '05.11.2024'
+    text: 'Резинки супер для домашних тренировок! Качество на высоте.',
+    date: '15.11.2024'
   }
 ];
 
@@ -158,9 +189,9 @@ export default function Index() {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <Icon name="ShoppingBag" className="text-primary" size={32} />
+              <Icon name="Dumbbell" className="text-primary" size={32} />
               <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                ShopVibe
+                FitGirl Shop
               </h1>
             </div>
 
@@ -298,10 +329,10 @@ export default function Index() {
         <div className="container mx-auto text-center">
           <div className="animate-fade-in">
             <h2 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
-              Стиль начинается здесь
+              Твой фитнес-старт
             </h2>
             <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-2xl mx-auto">
-              Откройте для себя уникальные товары с быстрой доставкой и безопасной оплатой
+              Спортивная одежда, инвентарь и питание для твоих тренировок
             </p>
             <Button size="lg" className="text-lg px-8 py-6" onClick={() => scrollToSection('catalog')}>
               Перейти к покупкам
@@ -311,19 +342,19 @@ export default function Index() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-20">
             <div className="p-6 rounded-2xl bg-white/70 backdrop-blur-sm border border-rose-200 hover:shadow-lg transition-shadow">
-              <Icon name="Truck" className="mx-auto text-primary mb-4" size={48} />
+              <Icon name="Sparkles" className="mx-auto text-primary mb-4" size={48} />
+              <h3 className="text-xl font-bold mb-2">Качественные материалы</h3>
+              <p className="text-gray-600">Дышащие ткани и проверенные бренды</p>
+            </div>
+            <div className="p-6 rounded-2xl bg-white/70 backdrop-blur-sm border border-rose-200 hover:shadow-lg transition-shadow">
+              <Icon name="Heart" className="mx-auto text-secondary mb-4" size={48} />
+              <h3 className="text-xl font-bold mb-2">Для каждой девушки</h3>
+              <p className="text-gray-600">Размеры XS-XXL, широкий выбор цветов</p>
+            </div>
+            <div className="p-6 rounded-2xl bg-white/70 backdrop-blur-sm border border-rose-200 hover:shadow-lg transition-shadow">
+              <Icon name="Truck" className="mx-auto text-accent mb-4" size={48} />
               <h3 className="text-xl font-bold mb-2">Быстрая доставка</h3>
-              <p className="text-gray-600">Доставим за 1-3 дня по всей стране</p>
-            </div>
-            <div className="p-6 rounded-2xl bg-white/70 backdrop-blur-sm border border-rose-200 hover:shadow-lg transition-shadow">
-              <Icon name="Shield" className="mx-auto text-secondary mb-4" size={48} />
-              <h3 className="text-xl font-bold mb-2">Безопасная оплата</h3>
-              <p className="text-gray-600">SSL-шифрование и проверенные платежные системы</p>
-            </div>
-            <div className="p-6 rounded-2xl bg-white/70 backdrop-blur-sm border border-rose-200 hover:shadow-lg transition-shadow">
-              <Icon name="Award" className="mx-auto text-accent mb-4" size={48} />
-              <h3 className="text-xl font-bold mb-2">Гарантия качества</h3>
-              <p className="text-gray-600">Только оригинальные товары от производителей</p>
+              <p className="text-gray-600">1-3 дня по России, примерка при получении</p>
             </div>
           </div>
         </div>
@@ -332,7 +363,7 @@ export default function Index() {
       <section id="catalog" className="py-20 px-4 bg-white/40">
         <div className="container mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">
-            Популярные товары
+            Хиты продаж
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {products.map((product, index) => (
@@ -378,25 +409,25 @@ export default function Index() {
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">О нас</h2>
           <div className="bg-white/70 backdrop-blur-sm rounded-3xl p-8 md:p-12 border border-rose-200">
             <p className="text-lg text-gray-700 mb-6">
-              ShopVibe — это современный интернет-магазин, где каждый найдет что-то особенное. Мы тщательно
-              отбираем товары, чтобы предложить вам только лучшее.
+              FitGirl Shop — твой надежный партнер в мире фитнеса! Мы создали магазин специально для девушек,
+              которые ценят качество, комфорт и стиль в спорте.
             </p>
             <p className="text-lg text-gray-700 mb-6">
-              Наша команда работает с 2020 года и за это время мы обслужили более 50 000 довольных клиентов.
-              Мы верим в качество, честность и отличный сервис.
+              Наша команда сама тренируется и знает, что важно для тренировок. Только проверенные бренды,
+              удобная одежда и эффективное спортивное питание.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
               <div className="text-center">
-                <p className="text-4xl font-bold text-primary mb-2">50K+</p>
-                <p className="text-gray-600">Довольных клиентов</p>
+                <p className="text-4xl font-bold text-primary mb-2">15K+</p>
+                <p className="text-gray-600">Спортивных девушек</p>
               </div>
               <div className="text-center">
-                <p className="text-4xl font-bold text-secondary mb-2">10K+</p>
-                <p className="text-gray-600">Товаров в каталоге</p>
+                <p className="text-4xl font-bold text-secondary mb-2">500+</p>
+                <p className="text-gray-600">Товаров для фитнеса</p>
               </div>
               <div className="text-center">
-                <p className="text-4xl font-bold text-accent mb-2">98%</p>
-                <p className="text-gray-600">Положительных отзывов</p>
+                <p className="text-4xl font-bold text-accent mb-2">99%</p>
+                <p className="text-gray-600">Рекомендуют подругам</p>
               </div>
             </div>
           </div>
@@ -449,7 +480,7 @@ export default function Index() {
                   <Icon name="MapPin" className="text-primary mt-1" size={24} />
                   <div>
                     <h4 className="font-bold mb-1">Адрес</h4>
-                    <p className="text-gray-600">г. Москва, ул. Примерная, д. 123</p>
+                    <p className="text-gray-600">г. Москва, ул. Спортивная, д. 45</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4 mb-6">
@@ -463,7 +494,7 @@ export default function Index() {
                   <Icon name="Mail" className="text-primary mt-1" size={24} />
                   <div>
                     <h4 className="font-bold mb-1">Email</h4>
-                    <p className="text-gray-600">info@shopvibe.ru</p>
+                    <p className="text-gray-600">hello@fitgirl-shop.ru</p>
                   </div>
                 </div>
               </div>
@@ -490,8 +521,8 @@ export default function Index() {
 
       <footer className="bg-gradient-to-r from-rose-400 via-stone-500 to-amber-300 text-white py-8">
         <div className="container mx-auto px-4 text-center">
-          <p className="text-lg font-semibold">© 2024 ShopVibe. Все права защищены.</p>
-          <p className="text-sm mt-2 opacity-90">Безопасные покупки с любовью ❤️</p>
+          <p className="text-lg font-semibold">© 2024 FitGirl Shop. Все права защищены.</p>
+          <p className="text-sm mt-2 opacity-90">Тренируйся с удовольствием 💪</p>
         </div>
       </footer>
 
