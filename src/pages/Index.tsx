@@ -611,10 +611,105 @@ export default function Index() {
         </div>
       </section>
 
-      <section id="about" className="py-20 px-4">
+      <section id="about" className="py-20 px-4 bg-white/40">
+        <div className="container mx-auto max-w-6xl">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-4">Почему выбирают нас</h2>
+          <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
+            Мы не просто магазин спортивной одежды — мы создаём комфорт и уверенность для каждой тренировки
+          </p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+            <Card className="border-2 hover:border-primary transition-all duration-300 hover:shadow-lg">
+              <CardHeader>
+                <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+                  <Icon name="ShieldCheck" className="text-primary" size={28} />
+                </div>
+                <h3 className="text-xl font-bold">Качество проверено</h3>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-600">
+                  Все товары сертифицированы и протестированы нашими спортсменами. Гарантия качества на всю продукцию.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="border-2 hover:border-secondary transition-all duration-300 hover:shadow-lg">
+              <CardHeader>
+                <div className="w-14 h-14 bg-secondary/10 rounded-full flex items-center justify-center mb-4">
+                  <Icon name="Truck" className="text-secondary" size={28} />
+                </div>
+                <h3 className="text-xl font-bold">Быстрая доставка</h3>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-600">
+                  Отправка заказов в день оформления. Доставка по Москве за 1 день, по России — до 7 дней.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="border-2 hover:border-accent transition-all duration-300 hover:shadow-lg">
+              <CardHeader>
+                <div className="w-14 h-14 bg-accent/10 rounded-full flex items-center justify-center mb-4">
+                  <Icon name="Sparkles" className="text-accent" size={28} />
+                </div>
+                <h3 className="text-xl font-bold">Эксклюзивные бренды</h3>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-600">
+                  Официальный представитель лучших спортивных брендов. У нас есть модели, которых нет в других магазинах.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="border-2 hover:border-primary transition-all duration-300 hover:shadow-lg">
+              <CardHeader>
+                <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+                  <Icon name="HeartHandshake" className="text-primary" size={28} />
+                </div>
+                <h3 className="text-xl font-bold">Личный подход</h3>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-600">
+                  Консультируем по выбору размера, модели и стиля. Наши эксперты помогут найти идеальный вариант.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="border-2 hover:border-secondary transition-all duration-300 hover:shadow-lg">
+              <CardHeader>
+                <div className="w-14 h-14 bg-secondary/10 rounded-full flex items-center justify-center mb-4">
+                  <Icon name="RefreshCw" className="text-secondary" size={28} />
+                </div>
+                <h3 className="text-xl font-bold">Легкий возврат</h3>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-600">
+                  Возврат и обмен в течение 14 дней. Примерьте дома — если не подошло, вернём деньги без вопросов.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="border-2 hover:border-accent transition-all duration-300 hover:shadow-lg">
+              <CardHeader>
+                <div className="w-14 h-14 bg-accent/10 rounded-full flex items-center justify-center mb-4">
+                  <Icon name="Gift" className="text-accent" size={28} />
+                </div>
+                <h3 className="text-xl font-bold">Бонусы и подарки</h3>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-600">
+                  Накопительные скидки до 15%, подарки к каждому заказу и эксклюзивные акции для постоянных клиентов.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 px-4">
         <div className="container mx-auto max-w-4xl">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">О нас</h2>
-          <div className="bg-white/70 backdrop-blur-sm rounded-3xl p-8 md:p-12 border border-rose-200">
+          <div className="bg-white/70 backdrop-blur-sm rounded-3xl p-8 md:p-12 border border-stone-200">
             <p className="text-lg text-gray-700 mb-6">
               FitGirl Shop — твой надежный партнер в мире фитнеса! Мы создали магазин специально для девушек,
               которые ценят качество, комфорт и стиль в спорте.
