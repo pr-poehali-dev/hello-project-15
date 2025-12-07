@@ -222,8 +222,8 @@ export default function Index() {
   const totalWorkoutTime = workouts.reduce((sum, w) => sum + w.duration, 0);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-rose-50 via-amber-50 to-stone-100">
-      <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-rose-100">
+    <div className="min-h-screen bg-gradient-to-br from-stone-100 via-amber-50 to-stone-200">
+      <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-stone-200">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
